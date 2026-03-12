@@ -1,0 +1,6 @@
+---
+services:
+    sharelatex:
+        image: sharelatex/sharelatex:server-pro
+        volumes:
+          - ../config/certs:/overleaf/certs
