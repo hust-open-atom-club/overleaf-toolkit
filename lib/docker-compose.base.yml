@@ -1,6 +1,9 @@
 ---
-services:
+networks:
+    sharelatex_network:
+        external: false
 
+services:
     sharelatex:
         restart: always
         image: "${IMAGE}"
@@ -24,7 +27,7 @@ services:
         networks:
             - sharelatex_network
         volumes:
-            - ../docker-volumes/key:/key
+            - ../docker-volumes/keys:/keys
         ports:
             - "9998:9998"
         environment:
@@ -37,7 +40,7 @@ services:
             - CLIENT_SECRET=secert
             - CLIENT_REDIRECT_URIs=https://cse-tex.hust.edu.cn/oidc/login/callback
             - OPENID_KEY_PHRASE=phrase
-            - SIGNING_PRIVATE_KEY=/key/rsa.private
-            - SIGNING_PUBLIC_KEY=/key/rsa.public
+            - SIGNING_PRIVATE_KEY=/keys/rsa.private
+            - SIGNING_PUBLIC_KEY=/keys/rsa.public
         restart: unless-stopped
         # PORT: 9998
