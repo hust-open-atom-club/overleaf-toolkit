@@ -19,3 +19,25 @@ services:
         env_file:
             - ../config/variables.env
         stop_grace_period: 60s
+    cas-to-oidc:
+        image: cas-to-oidc:latest
+        networks:
+            - sharelatex_network
+        volumes:
+            - ../docker-volumes/key:/key
+        ports:
+            - "9998:9998"
+        environment:
+            - HOST=0.0.0.0
+            - CAS_ADDRESS=https://pass.hust.edu.cn/cas
+            - PREFIX_URL=/hust-login
+            - ISSUER=https://cse-tex.hust.edu.cn/hust-login
+            - CLIENT_POST_LOGOUT_REDIRECT_URIs=https://cse-tex.hust.edu.cn/user/settings,https://cse-tex.hust.edu.cn
+            - CLIENT_ID=hust_cse_tex
+            - CLIENT_SECRET=secert
+            - CLIENT_REDIRECT_URIs=https://cse-tex.hust.edu.cn/oidc/login/callback
+            - OPENID_KEY_PHRASE=phrase
+            - SIGNING_PRIVATE_KEY=/key/rsa.private
+            - SIGNING_PUBLIC_KEY=/key/rsa.public
+        restart: unless-stopped
+        # PORT: 9998
