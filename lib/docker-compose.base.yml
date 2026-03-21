@@ -1,8 +1,4 @@
 ---
-networks:
-    sharelatex_network:
-        external: false
-
 services:
     sharelatex:
         restart: always
@@ -24,8 +20,6 @@ services:
         stop_grace_period: 60s
     cas-to-openid:
         image: cas-to-openid:latest
-        networks:
-            - sharelatex_network
         volumes:
             - ../docker-volumes/keys:/keys
         ports:

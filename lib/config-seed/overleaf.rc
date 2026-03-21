@@ -28,6 +28,7 @@ REDIS_AOF_PERSISTENCE=true
 
 # Git-bridge configuration (Server Pro only)
 GIT_BRIDGE_ENABLED=true
+GIT_BRIDGE_IMAGE=ghcr.io/hust-open-atom-club/overleaf/git-bridge
 GIT_BRIDGE_DATA_PATH=data/git-bridge
 
 # TLS proxy configuration (optional)
